@@ -8,7 +8,7 @@ class UNI_Lang:
         tokens = code.split('특')
         result = 1
         for token in tokens:
-            num = (self.data[int(token[token.find('세')-1])-4]if token.count('세') else 0) + token.count('대유니') - token.count('소유니')
+            num = (self.data[int(token[token.find('지')-1])-4]if token.count('지') else 0) + token.count('대유니') - token.count('소유니')
             result *= num
         return result
     
