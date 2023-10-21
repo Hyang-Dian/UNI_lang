@@ -5,7 +5,7 @@ class UNI_Lang:
         self.data = [0]*256
     
     def toNumber(self,code):
-        tokens = code.split('특')
+        tokens = code.split('특대')
         result = 1
         for token in tokens:
             num = (self.data[int(token[token.find('스윽')-1])-4]if token.count('스윽') else 0) + token.count('유') - token.count('니')
@@ -14,6 +14,8 @@ class UNI_Lang:
     
     @staticmethod
     def type(code):
+        if '비질게라고할뻔' in code:
+            return 'NOTIF'
         if '비질게' in code:
             return 'IF'
         if '욘서' in code:
@@ -48,6 +50,10 @@ class UNI_Lang:
         elif TYPE == 'IF':
             cond,cmd = code.split('비질게')
             if self.toNumber(cond) == 0:
+                return cmd
+        elif TYPE == 'NOTIF':
+            cond,cmd = code.split('비질게라고할뻔')
+            if self.toNumber(cond) != 0:
                 return cmd
         elif TYPE == 'MOVE':
             return self.toNumber(code.replace('욘서',''))
