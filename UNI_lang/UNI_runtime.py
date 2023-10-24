@@ -1,4 +1,5 @@
 import sys
+import re
 
 class UNI_Lang:
     def __init__(self):
@@ -8,12 +9,14 @@ class UNI_Lang:
         tokens = code.split('특대')
         result = 1
         for token in tokens:
-            num = (self.data[int(token[token.find('스윽')-1])-4]if token.count('스윽') else 0) + token.count('유') - token.count('니')
+            num = (self.data[int(re.sub(r'[^0-9]','',token[:token.find('스윽')]))-4]if token.count('스윽') else 0) + token.count('유') - token.count('니')
             result *= num
         return result
     
     @staticmethod
     def type(code):
+        if '#' == code[0]:
+            return 'COMMENT'
         if '비질게라고할뻔' in code:
             return 'NOTIF'
         if '비질게' in code:
@@ -34,7 +37,6 @@ class UNI_Lang:
         if code == '':
             return None
         TYPE = self.type(code)
-        
         if TYPE == 'DEF':
             var, cmd = code.split('챨')
             self.data[int(var)-4] = self.toNumber(cmd)
@@ -57,6 +59,8 @@ class UNI_Lang:
                 return cmd
         elif TYPE == 'MOVE':
             return self.toNumber(code.replace('욘서',''))
+        elif TYPE == 'COMMENT':
+            pass
     
     def compile(self, code, check=True, errors=100000):
         forgive = False
