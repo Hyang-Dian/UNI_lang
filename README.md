@@ -124,3 +124,7 @@
 # Thanks 
 > 원작 프로젝트 기획자 [정한 Ryucont](https://github.com/rycont) 님 및,  
 > 원작 프로젝트에 참여하신 많은 [능력자 분들](https://github.com/rycont/umjunsik-lang/blob/master/README.md#contributors-)
+
+# Contact
+> Discord : hyang_dian
+> X : @Hyang_Dian
